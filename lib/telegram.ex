@@ -1,0 +1,2 @@
+defmodule Telegram do
+end
