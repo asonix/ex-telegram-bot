@@ -39,8 +39,15 @@ defmodule Telegram.Types.Message.ChatMigration do
 
   ## Examples
 
-      iex> Telegram.Types.Message.ChatMigration.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.ChatMigration{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.ChatMigration.from_map(%{ "message_id" => 5, "date" => 0, "migrate_to_chat_id" => 5, "migrate_from_chat_id" => 6 })
+      {:ok,
+        %Telegram.Types.Message.ChatMigration{
+          message_id: 5,
+          date: 0,
+          migrate_to_chat_id: 5,
+          migrate_from_chat_id: 6
+        }
+      }
 
       iex> Telegram.Types.Message.ChatMigration.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -71,8 +78,13 @@ defmodule Telegram.Types.Message.ChatMigration do
 
   ## Examples
 
-      iex> Telegram.Types.Message.ChatMigration.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.ChatMigration{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.ChatMigration.from_map!(%{ "message_id" => 5, "date" => 0, "migrate_to_chat_id" => 5, "migrate_from_chat_id" => 6 })
+      %Telegram.Types.Message.ChatMigration{
+        message_id: 5,
+        date: 0,
+        migrate_to_chat_id: 5,
+        migrate_from_chat_id: 6
+      }
 
       iex> Telegram.Types.Message.ChatMigration.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

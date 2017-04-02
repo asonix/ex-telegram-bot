@@ -51,8 +51,17 @@ defmodule Telegram.Types.Message.Location do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Location.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.Location{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.Location.from_map(%{ "message_id" => 5, "date" => 0, "location" => %{ "longitude" => 1.0, "latitude" => 1.0 } })
+      {:ok,
+        %Telegram.Types.Message.Location{
+          message_id: 5,
+          date: 0,
+          location: %Telegram.Types.Location{
+            longitude: 1.0,
+            latitude: 1.0
+          }
+        }
+      }
 
       iex> Telegram.Types.Message.Location.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -86,8 +95,15 @@ defmodule Telegram.Types.Message.Location do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Location.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.Location{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.Location.from_map!(%{ "message_id" => 5, "date" => 0, "location" => %{ "longitude" => 1.0, "latitude" => 1.0 } })
+      %Telegram.Types.Message.Location{
+        message_id: 5,
+        date: 0,
+        location: %Telegram.Types.Location{
+          longitude: 1.0,
+          latitude: 1.0
+        }
+      }
 
       iex> Telegram.Types.Message.Location.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

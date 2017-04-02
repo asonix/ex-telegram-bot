@@ -36,8 +36,14 @@ defmodule Telegram.Types.Message.SupergroupChatCreated do
 
   ## Examples
 
-      iex> Telegram.Types.Message.SupergroupChatCreated.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.SupergroupChatCreated{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.SupergroupChatCreated.from_map(%{ "message_id" => 5, "date" => 0, "supergroup_chat_created" => true })
+      {:ok,
+        %Telegram.Types.Message.SupergroupChatCreated{
+          message_id: 5,
+          date: 0,
+          supergroup_chat_created: true
+        }
+      }
 
       iex> Telegram.Types.Message.SupergroupChatCreated.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -66,8 +72,12 @@ defmodule Telegram.Types.Message.SupergroupChatCreated do
 
   ## Examples
 
-      iex> Telegram.Types.Message.SupergroupChatCreated.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.SupergroupChatCreated{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.SupergroupChatCreated.from_map!(%{ "message_id" => 5, "date" => 0, "supergroup_chat_created" => true })
+      %Telegram.Types.Message.SupergroupChatCreated{
+        message_id: 5,
+        date: 0,
+        supergroup_chat_created: true
+      }
 
       iex> Telegram.Types.Message.SupergroupChatCreated.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

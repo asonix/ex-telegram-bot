@@ -15,7 +15,7 @@ defmodule Telegram.Types.Message.Contact do
     optional(String.t) => integer,
     optional(String.t) => integer,
     optional(String.t) => Telegram.Types.Message.input_type,
-    required(String.t) => Telegram.Contact.input_type
+    required(String.t) => Telegram.Types.Contact.input_type
   }
 
   @type t :: %__MODULE__{
@@ -51,8 +51,17 @@ defmodule Telegram.Types.Message.Contact do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Contact.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.Contact{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.Contact.from_map(%{ "message_id" => 5, "date" => 0, "contact" => %{ "phone_number" => "123-456-7890", "first_name" => "John" } })
+      {:ok,
+        %Telegram.Types.Message.Contact{
+          message_id: 5,
+          date: 0,
+          contact: %Telegram.Types.Contact{
+            phone_number: "123-456-7890",
+            first_name: "John"
+          }
+        }
+      }
 
       iex> Telegram.Types.Message.Contact.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -74,7 +83,7 @@ defmodule Telegram.Types.Message.Contact do
       forward_from_message_id:  map["forward_from_message_id"],
       forward_date:             map["forward_date"],
       reply_to_message:         to_struct(map["reply_to_message"], Telegram.Types.Message),
-      contact:                  to_struct(contact, Telegram.Contact)
+      contact:                  to_struct(contact, Telegram.Types.Contact)
     }}
   end
   def from_map(_) do
@@ -86,8 +95,15 @@ defmodule Telegram.Types.Message.Contact do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Contact.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.Contact{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.Contact.from_map!(%{ "message_id" => 5, "date" => 0, "contact" => %{ "phone_number" => "123-456-7890", "first_name" => "John" } })
+      %Telegram.Types.Message.Contact{
+        message_id: 5,
+        date: 0,
+        contact: %Telegram.Types.Contact{
+          phone_number: "123-456-7890",
+          first_name: "John"
+        }
+      }
 
       iex> Telegram.Types.Message.Contact.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

@@ -51,8 +51,17 @@ defmodule Telegram.Types.Message.Game do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Game.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.Game{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.Game.from_map(%{ "message_id" => 5, "date" => 0, "game" => %{ "title" => "Cool Game", "description" => "Really cool" } })
+      {:ok,
+        %Telegram.Types.Message.Game{
+          message_id: 5,
+          date: 0,
+          game: %Telegram.Types.Game{
+            title: "Cool Game",
+            description: "Really cool"
+          }
+        }
+      }
 
       iex> Telegram.Types.Message.Game.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -86,8 +95,15 @@ defmodule Telegram.Types.Message.Game do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Game.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.Game{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.Game.from_map!(%{ "message_id" => 5, "date" => 0, "game" => %{ "title" => "Cool Game", "description" => "Really cool" } })
+      %Telegram.Types.Message.Game{
+        message_id: 5,
+        date: 0,
+        game: %Telegram.Types.Game{
+          title: "Cool Game",
+          description: "Really cool"
+        }
+      }
 
       iex> Telegram.Types.Message.Game.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

@@ -6,7 +6,7 @@ defmodule Telegram.Types.Video do
   import Telegram.Util, only: [{:to_struct, 2}]
 
   @type input_type :: %{
-    required(String.t) => integer,
+    required(String.t) => String.t,
     required(String.t) => integer,
     required(String.t) => integer,
     required(String.t) => integer,
@@ -16,7 +16,7 @@ defmodule Telegram.Types.Video do
   }
 
   @type t :: %__MODULE__{
-              file_id:    integer,
+              file_id:    String.t,
               width:      integer,
               height:     integer,
               duration:   integer,
@@ -24,7 +24,7 @@ defmodule Telegram.Types.Video do
               mime_type:  String.t | nil,
               file_size:  integer | nil}
 
-  defstruct file_id:   0,
+  defstruct file_id:   "",
             width:     0,
             height:    0,
             duration:  0,
@@ -42,8 +42,8 @@ defmodule Telegram.Types.Video do
 
   ## Examples
 
-    iex> Telegram.Types.Video.from_map(%{ "file_id" => 5, "width" => 0, "height" => 0, "duration" => 0 })
-    {:ok, %Telegram.Types.Video{file_id: 5, width: 0, height: 0, duration: 0}}
+    iex> Telegram.Types.Video.from_map(%{ "file_id" => "abcd", "width" => 0, "height" => 0, "duration" => 0 })
+    {:ok, %Telegram.Types.Video{file_id: "abcd", width: 0, height: 0, duration: 0}}
 
     iex> Telegram.Types.Video.from_map(%{})
     {:error, %Telegram.Error{message: "Invalid Video data"}}
@@ -75,8 +75,8 @@ defmodule Telegram.Types.Video do
 
   ## Examples
 
-      iex> Telegram.Types.Video.from_map!(%{ "file_id" => 5, "width" => 0, "height" => 0, "duration" => 0 })
-      %Telegram.Types.Video{file_id: 5, width: 0, height: 0, duration: 0}
+      iex> Telegram.Types.Video.from_map!(%{ "file_id" => "abcd", "width" => 0, "height" => 0, "duration" => 0 })
+      %Telegram.Types.Video{file_id: "abcd", width: 0, height: 0, duration: 0}
 
       iex> Telegram.Types.Video.from_map!(%{})
       ** (Telegram.Error) Invalid Video data

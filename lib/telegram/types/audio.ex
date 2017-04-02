@@ -4,7 +4,7 @@ defmodule Telegram.Types.Audio do
   """
 
   @type input_type :: %{
-    required(String.t) => integer,
+    required(String.t) => String.t,
     required(String.t) => integer,
     optional(String.t) => String.t,
     optional(String.t) => String.t,
@@ -13,14 +13,14 @@ defmodule Telegram.Types.Audio do
   }
 
   @type t :: %__MODULE__{
-              file_id:    integer,
+              file_id:    String.t,
               duration:   integer,
               performer:  String.t | nil,
               title:      String.t | nil,
               mime_type:  String.t | nil,
               file_size:  integer | nil}
 
-  defstruct file_id:   0,
+  defstruct file_id:   "",
             duration:  0,
             performer: nil,
             title:     nil,
@@ -37,8 +37,8 @@ defmodule Telegram.Types.Audio do
 
   ## Examples
 
-      iex> Telegram.Types.Audio.from_map(%{ "file_id" => 5, "duration" => 0 })
-      {:ok, %Telegram.Types.Audio{file_id: 5, duration: 0}}
+      iex> Telegram.Types.Audio.from_map(%{ "file_id" => "abcd", "duration" => 0 })
+      {:ok, %Telegram.Types.Audio{file_id: "abcd", duration: 0}}
 
       iex> Telegram.Types.Audio.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Audio data"}}
@@ -64,8 +64,8 @@ defmodule Telegram.Types.Audio do
 
   ## Examples
 
-      iex> Telegram.Types.Audio.from_map!(%{ "file_id" => 5, "duration" => 0 })
-      %Telegram.Types.Audio{file_id: 5, duration: 0}
+      iex> Telegram.Types.Audio.from_map!(%{ "file_id" => "abcd", "duration" => 0 })
+      %Telegram.Types.Audio{file_id: "abcd", duration: 0}
 
       iex> Telegram.Types.Audio.from_map!(%{})
       ** (Telegram.Error) Invalid Audio data

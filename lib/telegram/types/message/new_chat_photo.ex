@@ -36,8 +36,14 @@ defmodule Telegram.Types.Message.NewChatPhoto do
 
   ## Examples
 
-      iex> Telegram.Types.Message.NewChatPhoto.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.NewChatPhoto{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.NewChatPhoto.from_map(%{ "message_id" => 5, "date" => 0, "new_chat_photo" => [] })
+      {:ok,
+        %Telegram.Types.Message.NewChatPhoto{
+          message_id: 5,
+          date: 0,
+          new_chat_photo: []
+        }
+      }
 
       iex> Telegram.Types.Message.NewChatPhoto.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -66,8 +72,12 @@ defmodule Telegram.Types.Message.NewChatPhoto do
 
   ## Examples
 
-      iex> Telegram.Types.Message.NewChatPhoto.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.NewChatPhoto{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.NewChatPhoto.from_map!(%{ "message_id" => 5, "date" => 0, "new_chat_photo" => [] })
+      %Telegram.Types.Message.NewChatPhoto{
+        message_id: 5,
+        date: 0,
+        new_chat_photo: []
+      }
 
       iex> Telegram.Types.Message.NewChatPhoto.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

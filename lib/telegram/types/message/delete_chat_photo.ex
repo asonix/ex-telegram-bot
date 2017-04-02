@@ -36,8 +36,14 @@ defmodule Telegram.Types.Message.DeleteChatPhoto do
 
   ## Examples
 
-      iex> Telegram.Types.Message.DeleteChatPhoto.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.DeleteChatPhoto{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.DeleteChatPhoto.from_map(%{ "message_id" => 5, "date" => 0, "delete_chat_photo" => true })
+      {:ok,
+        %Telegram.Types.Message.DeleteChatPhoto{
+          message_id: 5,
+          date: 0,
+          delete_chat_photo: true
+        }
+      }
 
       iex> Telegram.Types.Message.DeleteChatPhoto.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -66,8 +72,12 @@ defmodule Telegram.Types.Message.DeleteChatPhoto do
 
   ## Examples
 
-      iex> Telegram.Types.Message.DeleteChatPhoto.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.DeleteChatPhoto{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.DeleteChatPhoto.from_map!(%{ "message_id" => 5, "date" => 0, "delete_chat_photo" => true })
+      %Telegram.Types.Message.DeleteChatPhoto{
+        message_id: 5,
+        date: 0,
+        delete_chat_photo: true
+      }
 
       iex> Telegram.Types.Message.DeleteChatPhoto.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

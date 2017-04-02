@@ -36,8 +36,14 @@ defmodule Telegram.Types.Message.NewChatTitle do
 
   ## Examples
 
-      iex> Telegram.Types.Message.NewChatTitle.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.NewChatTitle{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.NewChatTitle.from_map(%{ "message_id" => 5, "date" => 0, "new_chat_title" => "hey" })
+      {:ok,
+        %Telegram.Types.Message.NewChatTitle{
+          message_id: 5,
+          date: 0,
+          new_chat_title: "hey"
+        }
+      }
 
       iex> Telegram.Types.Message.NewChatTitle.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -66,8 +72,12 @@ defmodule Telegram.Types.Message.NewChatTitle do
 
   ## Examples
 
-      iex> Telegram.Types.Message.NewChatTitle.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.NewChatTitle{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.NewChatTitle.from_map!(%{ "message_id" => 5, "date" => 0, "new_chat_title" => "hey" })
+      %Telegram.Types.Message.NewChatTitle{
+        message_id: 5,
+        date: 0,
+        new_chat_title: "hey"
+      }
 
       iex> Telegram.Types.Message.NewChatTitle.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

@@ -36,8 +36,14 @@ defmodule Telegram.Types.Message.ChannelChatCreated do
 
   ## Examples
 
-      iex> Telegram.Types.Message.ChannelChatCreated.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.ChannelChatCreated{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.ChannelChatCreated.from_map(%{ "message_id" => 5, "date" => 0, "channel_chat_created" => true })
+      {:ok,
+        %Telegram.Types.Message.ChannelChatCreated{
+          message_id: 5,
+          date: 0,
+          channel_chat_created: true
+        }
+      }
 
       iex> Telegram.Types.Message.ChannelChatCreated.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -66,8 +72,12 @@ defmodule Telegram.Types.Message.ChannelChatCreated do
 
   ## Examples
 
-      iex> Telegram.Types.Message.ChannelChatCreated.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.ChannelChatCreated{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.ChannelChatCreated.from_map!(%{ "message_id" => 5, "date" => 0, "channel_chat_created" => true })
+      %Telegram.Types.Message.ChannelChatCreated{
+        message_id: 5,
+        date: 0,
+        channel_chat_created: true
+      }
 
       iex> Telegram.Types.Message.ChannelChatCreated.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

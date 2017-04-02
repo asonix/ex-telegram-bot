@@ -54,8 +54,16 @@ defmodule Telegram.Types.Message.Document do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Document.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.Document{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.Document.from_map(%{ "message_id" => 5, "date" => 0, "document" => %{ "file_id" => 6 } })
+      {:ok,
+        %Telegram.Types.Message.Document{
+          message_id: 5,
+          date: 0,
+          document: %Telegram.Types.Document{
+            file_id: 6
+          }
+        }
+      }
 
       iex> Telegram.Types.Message.Document.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -90,8 +98,14 @@ defmodule Telegram.Types.Message.Document do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Document.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.Document{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.Document.from_map!(%{ "message_id" => 5, "date" => 0, "document" => %{ "file_id" => 6 } })
+      %Telegram.Types.Message.Document{
+        message_id: 5,
+        date: 0,
+        document: %Telegram.Types.Document{
+          file_id: 6
+        }
+      }
 
       iex> Telegram.Types.Message.Document.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

@@ -54,8 +54,19 @@ defmodule Telegram.Types.Message.Video do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Video.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.Video{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.Video.from_map(%{ "message_id" => 5, "date" => 0, "video" => %{ "file_id" => "abcd", "width" => 1, "height" => 1, "duration" => 1 } })
+      {:ok,
+        %Telegram.Types.Message.Video{
+          message_id: 5,
+          date: 0,
+          video: %Telegram.Types.Video{
+            file_id: "abcd",
+            width: 1,
+            height: 1,
+            duration: 1
+          }
+        }
+      }
 
       iex> Telegram.Types.Message.Video.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -90,8 +101,17 @@ defmodule Telegram.Types.Message.Video do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Video.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.Video{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.Video.from_map!(%{ "message_id" => 5, "date" => 0, "video" => %{ "file_id" => "abcd", "width" => 1, "height" => 1, "duration" => 1 } })
+      %Telegram.Types.Message.Video{
+        message_id: 5,
+        date: 0,
+        video: %Telegram.Types.Video{
+          file_id: "abcd",
+          width: 1,
+          height: 1,
+          duration: 1
+        }
+      }
 
       iex> Telegram.Types.Message.Video.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

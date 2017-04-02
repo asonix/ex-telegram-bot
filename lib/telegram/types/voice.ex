@@ -4,14 +4,14 @@ defmodule Telegram.Types.Voice do
   """
 
   @type input_type :: %{
-    required(String.t) => integer,
+    required(String.t) => String.t,
     required(String.t) => integer,
     optional(String.t) => String.t,
     optional(String.t) => integer
   }
 
   @type t :: %__MODULE__{
-              file_id:    integer,
+              file_id:    String.t,
               duration:   integer,
               mime_type:  String.t | nil,
               file_size:  integer | nil}
@@ -31,8 +31,8 @@ defmodule Telegram.Types.Voice do
 
   ## Examples
 
-    iex> Telegram.Types.Voice.from_map(%{ "file_id" => 5, "duration" => 0 })
-    {:ok, %Telegram.Types.Voice{file_id: 5, duration: 0}}
+    iex> Telegram.Types.Voice.from_map(%{ "file_id" => "abcd", "duration" => 0 })
+    {:ok, %Telegram.Types.Voice{file_id: "abcd", duration: 0}}
 
     iex> Telegram.Types.Voice.from_map(%{})
     {:error, %Telegram.Error{message: "Invalid Voice data"}}
@@ -56,8 +56,8 @@ defmodule Telegram.Types.Voice do
 
   ## Examples
 
-      iex> Telegram.Types.Voice.from_map!(%{ "file_id" => 5, "duration" => 0 })
-      %Telegram.Types.Voice{file_id: 5, duration: 0}
+      iex> Telegram.Types.Voice.from_map!(%{ "file_id" => "abcd", "duration" => 0 })
+      %Telegram.Types.Voice{file_id: "abcd", duration: 0}
 
       iex> Telegram.Types.Voice.from_map!(%{})
       ** (Telegram.Error) Invalid Voice data

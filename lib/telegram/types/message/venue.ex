@@ -51,8 +51,21 @@ defmodule Telegram.Types.Message.Venue do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Venue.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.Venue{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.Venue.from_map(%{ "message_id" => 5, "date" => 0, "venue" => %{ "location" => %{ "longitude" => 1.0, "latitude" => 1.0 }, "title" => "Cool Place", "address" => "1234 Cool Dr" } })
+      {:ok,
+        %Telegram.Types.Message.Venue{
+          message_id: 5,
+          date: 0,
+          venue: %Telegram.Types.Venue{
+            location: %Telegram.Types.Location{
+              longitude: 1.0,
+              latitude: 1.0
+            },
+            title: "Cool Place",
+            address: "1234 Cool Dr"
+          }
+        }
+      }
 
       iex> Telegram.Types.Message.Venue.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -86,8 +99,19 @@ defmodule Telegram.Types.Message.Venue do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Venue.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.Venue{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.Venue.from_map!(%{ "message_id" => 5, "date" => 0, "venue" => %{ "location" => %{ "longitude" => 1.0, "latitude" => 1.0 }, "title" => "Cool Place", "address" => "1234 Cool Dr" } })
+      %Telegram.Types.Message.Venue{
+        message_id: 5,
+        date: 0,
+        venue: %Telegram.Types.Venue{
+          location: %Telegram.Types.Location{
+            longitude: 1.0,
+            latitude: 1.0
+          },
+          title: "Cool Place",
+          address: "1234 Cool Dr"
+        }
+      }
 
       iex> Telegram.Types.Message.Venue.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

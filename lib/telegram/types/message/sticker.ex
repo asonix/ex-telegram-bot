@@ -51,8 +51,18 @@ defmodule Telegram.Types.Message.Sticker do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Sticker.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.Sticker{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.Sticker.from_map(%{ "message_id" => 5, "date" => 0, "sticker" => %{ "file_id" => 6, "width" => 1, "height" => 1 } })
+      {:ok,
+        %Telegram.Types.Message.Sticker{
+          message_id: 5,
+          date: 0,
+          sticker: %Telegram.Types.Sticker{
+            file_id: 6,
+            width: 1,
+            height: 1
+          }
+        }
+      }
 
       iex> Telegram.Types.Message.Sticker.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -86,8 +96,16 @@ defmodule Telegram.Types.Message.Sticker do
 
   ## Examples
 
-      iex> Telegram.Types.Message.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.Sticker.from_map!(%{ "message_id" => 5, "date" => 0, "sticker" => %{ "file_id" => 6, "width" => 1, "height" => 1 } })
+      %Telegram.Types.Message.Sticker{
+        message_id: 5,
+        date: 0,
+        sticker: %Telegram.Types.Sticker{
+          file_id: 6,
+          width: 1,
+          height: 1
+        }
+      }
 
       iex> Telegram.Types.Message.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

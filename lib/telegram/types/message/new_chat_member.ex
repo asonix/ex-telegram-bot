@@ -33,8 +33,17 @@ defmodule Telegram.Types.Message.NewChatMember do
 
   ## Examples
 
-      iex> Telegram.Types.Message.NewChatMember.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.NewChatMember{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.NewChatMember.from_map(%{ "message_id" => 5, "date" => 0, "new_chat_member" => %{ "id" => 6, "first_name" => "John" } })
+      {:ok,
+        %Telegram.Types.Message.NewChatMember{
+          message_id: 5,
+          date: 0,
+          new_chat_member: %Telegram.Types.User{
+            id: 6,
+            first_name: "John"
+          }
+        }
+      }
 
       iex> Telegram.Types.Message.NewChatMember.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -62,8 +71,15 @@ defmodule Telegram.Types.Message.NewChatMember do
 
   ## Examples
 
-      iex> Telegram.Types.Message.NewChatMember.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.NewChatMember{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.NewChatMember.from_map!(%{ "message_id" => 5, "date" => 0, "new_chat_member" => %{ "id" => 6, "first_name" => "John" } })
+      %Telegram.Types.Message.NewChatMember{
+        message_id: 5,
+        date: 0,
+        new_chat_member: %Telegram.Types.User{
+          id: 6,
+          first_name: "John"
+        }
+      }
 
       iex> Telegram.Types.Message.NewChatMember.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

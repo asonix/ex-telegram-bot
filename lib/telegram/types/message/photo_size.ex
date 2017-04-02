@@ -54,10 +54,10 @@ defmodule Telegram.Types.Message.PhotoSize do
 
   ## Examples
 
-      iex> Telegram.Types.Message.PhotoSize.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.Photosize{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.PhotoSize.from_map(%{ "message_id" => 5, "date" => 0, "photo" => [] })
+      {:ok, %Telegram.Types.Message.PhotoSize{message_id: 5, date: 0, photo: []}}
 
-      iex> Telegram.Types.Message.Photosize.from_map(%{})
+      iex> Telegram.Types.Message.PhotoSize.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
 
   """
@@ -90,10 +90,10 @@ defmodule Telegram.Types.Message.PhotoSize do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Photosize.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.Photosize{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.PhotoSize.from_map!(%{ "message_id" => 5, "date" => 0, "photo" => [] })
+      %Telegram.Types.Message.PhotoSize{message_id: 5, date: 0, photo: []}
 
-      iex> Telegram.Types.Message.Photosize.from_map!(%{})
+      iex> Telegram.Types.Message.PhotoSize.from_map!(%{})
       ** (Telegram.Error) Invalid Message data
 
   """

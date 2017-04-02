@@ -51,8 +51,17 @@ defmodule Telegram.Types.Message.Audio do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Audio.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message.Audio{message_id: 5, date: 0}}
+      iex> Telegram.Types.Message.Audio.from_map(%{ "message_id" => 5, "date" => 0, "audio" => %{ "file_id" => "abcd", "duration" => 0 } })
+      {:ok,
+        %Telegram.Types.Message.Audio{
+          message_id: 5,
+          date: 0,
+          audio: %Telegram.Types.Audio{
+            file_id: "abcd",
+            duration: 0
+          }
+        }
+      }
 
       iex> Telegram.Types.Message.Audio.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -82,8 +91,15 @@ defmodule Telegram.Types.Message.Audio do
 
   ## Examples
 
-      iex> Telegram.Types.Message.Audio.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message.Audio{message_id: 5, date: 0}
+      iex> Telegram.Types.Message.Audio.from_map!(%{ "message_id" => 5, "date" => 0, "audio" => %{ "file_id" => "abcd", "duration" => 0 } })
+      %Telegram.Types.Message.Audio{
+        message_id: 5,
+        date: 0,
+        audio: %Telegram.Types.Audio{
+          file_id: "abcd",
+          duration: 0
+        }
+      }
 
       iex> Telegram.Types.Message.Audio.from_map!(%{})
       ** (Telegram.Error) Invalid Message data
