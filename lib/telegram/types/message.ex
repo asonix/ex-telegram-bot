@@ -3,8 +3,6 @@ defmodule Telegram.Types.Message do
   This struct represents message data provided by Telegram's bot API
   """
 
-  import Telegram.Util, only: [to_struct: 2, to_structs: 2]
-
   @type input_type :: %{
     required(String.t) => integer,
     optional(String.t) => Telegram.Types.User.input_type,
@@ -17,7 +15,7 @@ defmodule Telegram.Types.Message do
     optional(String.t) => __MODULE__.input_type,
     optional(String.t) => integer,
     optional(String.t) => String.t,
-    optional(String.t) => [Telegram.Types.Chat.input_type],
+    optional(String.t) => [Telegram.Types.MessageEntity.input_type],
     optional(String.t) => Telegram.Types.Audio.input_type,
     optional(String.t) => Telegram.Types.Document.input_type,
     optional(String.t) => Telegram.Types.Game.input_type,
@@ -123,51 +121,61 @@ defmodule Telegram.Types.Message do
 
   ## Examples
 
-      iex> Telegram.Types.Message.from_map(%{ "message_id" => 5, "date" => 0 })
-      {:ok, %Telegram.Types.Message{message_id: 5, date: 0}}
+  # iex> Telegram.Types.Message.from_map(%{ "message_id" => 5, "date" => 0 })
+  # {:ok, %Telegram.Types.Message{message_id: 5, date: 0}}
 
       iex> Telegram.Types.Message.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Message data"}}
 
   """
   @spec from_map(input_type) :: {:ok, t} | {:error, Telegram.Error.t}
-  def from_map(%{"message_id" => message_id, "date" => date}=map) do
-    {:ok, %__MODULE__{
-      message_id:               message_id,
-      from:                     to_struct(map["from"], Telegram.Types.User),
-      date:                     date,
-      chat:                     to_struct(map["chat"], Telegram.Types.Chat),
-      forward_from:             to_struct(map["forward_from"], Telegram.Types.User),
-      forward_from_chat:        to_struct(map["forward_from_chat"], Telegram.Types.Chat),
-      forward_from_message_id:  map["forward_from_message_id"],
-      forward_date:             map["forward_date"],
-      reply_to_message:         to_struct(map["reply_to_message"], __MODULE__),
-      edit_date:                map["edit_date"],
-      text:                     map["text"],
-      entities:                 to_structs(map["entities"], Telegram.Types.MessageEntity),
-      audio:                    to_struct(map["audio"], Telegram.Types.Audio),
-      document:                 to_struct(map["document"], Telegram.Types.Document),
-      game:                     to_struct(map["game"], Telegram.Types.Game),
-      photo:                    to_structs(map["photo"], Telegram.Types.PhotoSize),
-      sticker:                  to_struct(map["sticker"], Telegram.Types.Sticker),
-      video:                    to_struct(map["video"], Telegram.Types.Video),
-      voice:                    to_struct(map["voice"], Telegram.Types.Voice),
-      caption:                  map["caption"],
-      contact:                  to_struct(map["contact"], Telegram.Contact),
-      location:                 to_struct(map["location"], Telegram.Location),
-      venue:                    to_struct(map["venue"], Telegram.Venue),
-      new_chat_member:          to_struct(map["new_chat_member"], Telegram.Types.User),
-      left_chat_member:         to_struct(map["left_chat_member"], Telegram.Types.User),
-      new_chat_title:           map["new_chat_title"],
-      new_chat_photo:           to_structs(map["new_chat_photo"], Telegram.Types.PhotoSize),
-      delete_chat_photo:        Map.get(map, "delete_chat_photo", false),
-      group_chat_created:       Map.get(map, "group_chat_created", false),
-      supergroup_chat_created:  Map.get(map, "supergroup_chat_created", false),
-      channel_chat_created:     Map.get(map, "channel_chat_created", false),
-      migrate_to_chat_id:       map["migrate_to_chat_id"],
-      migrate_from_chat_id:     map["migrate_from_chat_id"],
-      pinned_message:           to_struct(map["pinned_message"], __MODULE__)
-    }}
+  def from_map(%{"message_id" => _, "date" => _}=map) do
+    cond do
+      not is_nil(Map.get(map, "audio")) ->
+        Telegram.Types.Message.Audio.from_map(map)
+      not is_nil(Map.get(map, "channel_chat_created")) ->
+        Telegram.Types.Message.ChannelChatCreated.from_map(map)
+      not is_nil(Map.get(map, "migrate_to_chat_id")) ->
+        Telegram.Types.Message.ChatMigration.from_map(map)
+      not is_nil(Map.get(map, "contact")) ->
+        Telegram.Types.Message.Contact.from_map(map)
+      not is_nil(Map.get(map, "delete_chat_photo")) ->
+        Telegram.Types.Message.DeleteChatPhoto.from_map(map)
+      not is_nil(Map.get(map, "document")) ->
+        Telegram.Types.Message.Document.from_map(map)
+      not is_nil(Map.get(map, "game")) ->
+        Telegram.Types.Message.Game.from_map(map)
+      not is_nil(Map.get(map, "group_chat_created")) ->
+        Telegram.Types.Message.GroupChatCreated.from_map(map)
+      not is_nil(Map.get(map, "left_chat_member")) ->
+        Telegram.Types.Message.LeftChatMember.from_map(map)
+      not is_nil(Map.get(map, "location")) ->
+        Telegram.Types.Message.Location.from_map(map)
+      not is_nil(Map.get(map, "new_chat_member")) ->
+        Telegram.Types.Message.NewChatMember.from_map(map)
+      not is_nil(Map.get(map, "new_chat_photo")) ->
+        Telegram.Types.Message.NewChatPhoto.from_map(map)
+      not is_nil(Map.get(map, "new_chat_title")) ->
+        Telegram.Types.Message.NewChatTitle.from_map(map)
+      not is_nil(Map.get(map, "photo")) ->
+        Telegram.Types.Message.PhotoSize.from_map(map)
+      not is_nil(Map.get(map, "pinned_message")) ->
+        Telegram.Types.Message.PinnedMessage.from_map(map)
+      not is_nil(Map.get(map, "sticker")) ->
+        Telegram.Types.Message.Sticker.from_map(map)
+      not is_nil(Map.get(map, "supergroup_chat_created")) ->
+        Telegram.Types.Message.SupergroupChatCreated.from_map(map)
+      not is_nil(Map.get(map, "text")) ->
+        Telegram.Types.Message.Text.from_map(map)
+      not is_nil(Map.get(map, "venue")) ->
+        Telegram.Types.Message.Venue.from_map(map)
+      not is_nil(Map.get(map, "video")) ->
+        Telegram.Types.Message.Video.from_map(map)
+      not is_nil(Map.get(map, "voice")) ->
+        Telegram.Types.Message.Voice.from_map(map)
+      true ->
+        {:error, %Telegram.Error{message: "Invalid Message data"}}
+    end
   end
   def from_map(_) do
     {:error, %Telegram.Error{message: "Invalid Message data"}}
@@ -178,8 +186,8 @@ defmodule Telegram.Types.Message do
 
   ## Examples
 
-      iex> Telegram.Types.Message.from_map!(%{ "message_id" => 5, "date" => 0 })
-      %Telegram.Types.Message{message_id: 5, date: 0}
+  # iex> Telegram.Types.Message.from_map!(%{ "message_id" => 5, "date" => 0 })
+  # %Telegram.Types.Message{message_id: 5, date: 0}
 
       iex> Telegram.Types.Message.from_map!(%{})
       ** (Telegram.Error) Invalid Message data

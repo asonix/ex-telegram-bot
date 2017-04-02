@@ -49,7 +49,7 @@ defmodule Telegram.Types.MessageEntity do
       type:     id,
       offset:   offset,
       length:   length,
-      url:      Map.get(map, "user"),
+      url:      map["url"],
       user:     to_struct(map["user"], Telegram.Types.User)
     }}
   end
