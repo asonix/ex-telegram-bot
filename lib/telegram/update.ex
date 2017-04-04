@@ -57,7 +57,9 @@ defmodule Telegram.Update do
   def marshal_update(update) when is_map(update) do
     Telegram.Types.Update.from_map(update)
   end
-  def marshal_update(_), do: nil
+  def marshal_update(_) do
+    {:error, %Telegram.Error{message: "Invalid Update data"}}
+  end
 
   ### Private
 
