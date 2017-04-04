@@ -30,6 +30,22 @@ defmodule Telegram.Types.WebhookInfo do
 
   @type output_type :: {:ok, t} | {:error, Telegram.Error.t}
 
+  @doc """
+  ## Examples
+
+      iex> Telegram.Types.WebhookInfo.from_map(%{"url" => "https://example.com/telegram", "has_custom_certificate" => false, "pending_update_count" => 0})
+      {:ok,
+        %Telegram.Types.WebhookInfo{
+          url: "https://example.com/telegram",
+          has_custom_certificate: false,
+          pending_update_count: 0
+        }
+      }
+
+      iex> Telegram.Types.WebhookInfo.from_map(%{})
+      {:error, %Telegram.Error{message: "Invalid WebhookInfo data"}}
+
+  """
   @spec from_map(input_type) :: output_type
   def from_map(%{
     "url" => url,
