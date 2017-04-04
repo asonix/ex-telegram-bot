@@ -24,6 +24,21 @@ defmodule Telegram.Types.Update do
                        Telegram.Types.Update.ChosenInlineResult.output_type |
                        Telegram.Types.Update.CallbackQuery.output_type
 
+  @doc """
+  ## Examples
+
+      iex> Telegram.Types.Update.from_map(%{ "update_id" => 5, "message" => %{ "message_id" => 6, "date" => 0, "text" => "hey" } })
+      {:ok,
+        %Telegram.Types.Update.Message{
+          update_id: 5,
+          message: %Telegram.Types.Message.Text{
+            message_id: 6,
+            date: 0,
+            text: "hey"
+          }
+        }
+      }
+  """
   @spec from_map(input_type) :: output_type
   def from_map(%{"update_id" => _}=map) do
     cond do

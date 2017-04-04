@@ -13,9 +13,34 @@ defmodule Telegram.Update do
 
   ### Public
 
+  @type input_type :: %{
+                      optional(atom) => integer,
+                      optional(atom) => integer,
+                      optional(atom) => integer,
+                      optional(atom) => [String.t]} |
+                      []
+
+  @type output_type :: {:ok, t} | {:error, Telegram.Error.t}
+
+  @doc """
+  ## Examples
+
+      iex> Telegram.Update.init()
+      {:ok, %Telegram.Update{timeout: 100}}
+
+      iex> Telegram.Update.init(timeout: 0)
+      {:ok, %Telegram.Update{timeout: 0}}
+
+      iex> Telegram.Update.init(%{timeout: 0})
+      {:ok, %Telegram.Update{timeout: 0}}
+
+  """
+  @spec init() :: output_type
+  def init(), do: init(%{})
+  @spec init(input_type) :: output_type
   def init(map) when is_map(map) do
     map
-    |> Enum.into([])
+    |> Map.to_list
     |> init
   end
   def init(keyword) when is_list(keyword) do
@@ -26,7 +51,6 @@ defmodule Telegram.Update do
     end
   end
 
-  # Got that railway-oriented programming
   def get_updates(%Telegram{}=telegram, %__MODULE__{}=update) do
     telegram
     |> Telegram.Util.url("getUpdates")
@@ -54,6 +78,21 @@ defmodule Telegram.Update do
          message: "Telegram struct is required for getting updates"}]}
   end
 
+  @doc """
+  ## Examples
+
+      iex> Telegram.Update.marshal_update(%{"update_id" => 5, "message" => %{ "message_id" => 6, "date" => 0, "text" => "hey" } })
+      {:ok,
+        %Telegram.Types.Update.Message{
+          update_id: 5,
+          message: %Telegram.Types.Message.Text{
+            message_id: 6,
+            date: 0,
+            text: "hey"
+          }
+        }
+      }
+  """
   def marshal_update(update) when is_map(update) do
     Telegram.Types.Update.from_map(update)
   end
