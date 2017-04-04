@@ -57,9 +57,8 @@ defmodule MessageTest do
             username: "@JohnDoe"
           },
           date: 123456789,
-          chat: %Telegram.Types.Chat{
+          chat: %Telegram.Types.Chat.Supergroup{
             id: 7,
-            type: "supergroup",
             title: "Bananas"
           },
           forward_from: %Telegram.Types.User{
@@ -68,9 +67,8 @@ defmodule MessageTest do
             last_name: "Buck",
             username: "@JillBuck"
           },
-          forward_from_chat: %Telegram.Types.Chat{
+          forward_from_chat: %Telegram.Types.Chat.Group{
             id: 9,
-            type: "group",
             title: "Apples"
           },
           forward_from_message_id: 10,

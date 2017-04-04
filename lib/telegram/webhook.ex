@@ -19,7 +19,7 @@ defmodule Telegram.Webhook do
     |> Enum.into([])
     |> init
   end
-  def init([url: url]=keyword) when is_list(keyword) do
+  def init(keyword) when is_list(keyword) do
     if Keyword.keyword?(keyword) do
       {:ok, from_keyword(keyword)}
     else
@@ -78,12 +78,12 @@ defmodule Telegram.Webhook do
 
   ### Private
 
-  defp handle_response({:ok, HTTPoison.Response{
+  defp handle_response({:ok, %HTTPoison.Response{
     status_code: code
   }}) when code >= 200 and code < 300 do
     {:ok, code}
   end
-  defp handle_response({:ok, HTTPoison.Response{status_code: code}}) do
+  defp handle_response({:ok, %HTTPoison.Response{status_code: code}}) do
     {:error, %Telegram.Error{message: "Invalid Code: #{code}"}}
   end
   defp handle_response({:error, _}=err), do: err

@@ -3,32 +3,15 @@ defmodule Telegram.Types.Chat do
   This struct represents chat data provided by Telegram's bot API
   """
 
-  @type input_type :: %{
-    required(String.t) => integer,
-    required(String.t) => String.t,
-    optional(String.t) => String.t,
-    optional(String.t) => String.t,
-    optional(String.t) => String.t,
-    optional(String.t) => String.t,
-    optional(String.t) => boolean
-  }
+  @type input_type :: Telegram.Types.Chat.Private.input_type |
+                      Telegram.Types.Chat.Group.input_type |
+                      Telegram.Types.Chat.Supergroup.input_type |
+                      Telegram.Types.Chat.Channel.input_type
 
-  @type t :: %__MODULE__{
-              id:                             integer,
-              type:                           String.t,
-              title:                          String.t | nil,
-              username:                       String.t | nil,
-              first_name:                     String.t | nil,
-              last_name:                      String.t | nil,
-              all_members_are_administrators: boolean | nil}
-
-  defstruct id:                             0,
-            type:                           "",
-            title:                          nil,
-            username:                       nil,
-            first_name:                     nil,
-            last_name:                      nil,
-            all_members_are_administrators: nil
+  @type t :: Telegram.Types.Chat.Private.t |
+             Telegram.Types.Chat.Group.t |
+             Telegram.Types.Chat.Supergroup.t |
+             Telegram.Types.Chat.Channel.t
 
   @doc """
   Creates a Chat struct from a map object.
@@ -40,24 +23,31 @@ defmodule Telegram.Types.Chat do
 
   ## Examples
 
-      iex> Telegram.Types.Chat.from_map(%{ "id" => 5, "type" => "private" })
-      {:ok, %Telegram.Types.Chat{id: 5, type: "private"}}
+      iex> Telegram.Types.Chat.from_map(%{ "id" => 5, "type" => "group", "title" => "hey" })
+      {:ok, %Telegram.Types.Chat.Group{id: 5, title: "hey"}}
 
       iex> Telegram.Types.Chat.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Chat data"}}
 
   """
   @spec from_map(input_type) :: {:ok, t} | {:error, Telegram.Error.t}
-  def from_map(%{"id" => id, "type" => type}=map) do
-    {:ok, %__MODULE__{
-      id:                             id,
-      type:                           type,
-      title:                          Map.get(map, "title"),
-      username:                       Map.get(map, "username"),
-      first_name:                     Map.get(map, "first_name"),
-      last_name:                      Map.get(map, "last_name"),
-      all_members_are_administrators: Map.get(map, "all_members_are_administrators")
-    }}
+  def from_map(%{"type" => type}=map) do
+    case type do
+      "private" ->
+        Telegram.Types.Chat.Private.from_map(map)
+
+      "group" ->
+        Telegram.Types.Chat.Group.from_map(map)
+
+      "supergroup" ->
+        Telegram.Types.Chat.Supergroup.from_map(map)
+
+      "channel" ->
+        Telegram.Types.Chat.Channel.from_map(map)
+
+      _ ->
+        {:error, %Telegram.Error{message: "Invalid Chat data"}}
+    end
   end
   def from_map(_) do
     {:error, %Telegram.Error{message: "Invalid Chat data"}}
@@ -68,8 +58,8 @@ defmodule Telegram.Types.Chat do
 
   ## Examples
 
-      iex> Telegram.Types.Chat.from_map!(%{ "id" => 5, "type" => "private" })
-      %Telegram.Types.Chat{id: 5, type: "private"}
+      iex> Telegram.Types.Chat.from_map!(%{ "id" => 5, "type" => "private", "first_name" => "yo" })
+      %Telegram.Types.Chat.Private{id: 5, first_name: "yo"}
 
       iex> Telegram.Types.Chat.from_map!(%{})
       ** (Telegram.Error) Invalid Chat data
