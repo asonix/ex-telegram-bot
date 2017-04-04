@@ -30,15 +30,15 @@ defmodule Telegram.Types.Chat.Group do
 
   ## Examples
 
-      iex> Telegram.Types.Chat.from_map(%{ "id" => 5, "type" => "group", "title" => "hey" })
+      iex> Telegram.Types.Chat.Group.from_map(%{ "id" => 5, "type" => "group", "title" => "hey" })
       {:ok,
-        %Telegram.Types.Chat{
+        %Telegram.Types.Chat.Group{
           id: 5,
           title: "hey"
         }
       }
 
-      iex> Telegram.Types.Chat.from_map(%{})
+      iex> Telegram.Types.Chat.Group.from_map(%{})
       {:error, %Telegram.Error{message: "Invalid Chat data"}}
 
   """
@@ -63,13 +63,13 @@ defmodule Telegram.Types.Chat.Group do
 
   ## Examples
 
-      iex> Telegram.Types.Chat.from_map!(%{ "id" => 5, "type" => "group", "title" => "hey" })
-      %Telegram.Types.Chat{
+      iex> Telegram.Types.Chat.Group.from_map!(%{ "id" => 5, "type" => "group", "title" => "hey" })
+      %Telegram.Types.Chat.Group{
         id: 5,
         title: "hey"
       }
 
-      iex> Telegram.Types.Chat.from_map!(%{})
+      iex> Telegram.Types.Chat.Group.from_map!(%{})
       ** (Telegram.Error) Invalid Chat data
 
   """

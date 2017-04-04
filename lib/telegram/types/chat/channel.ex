@@ -28,7 +28,7 @@ defmodule Telegram.Types.Chat.Channel do
 
   ## Examples
 
-      iex> Telegram.Types.Chat.Channel.from_map(%{ "id" => 5, "type" => "channel" })
+      iex> Telegram.Types.Chat.Channel.from_map(%{ "id" => 5, "type" => "channel", "title" => "hey" })
       {:ok,
         %Telegram.Types.Chat.Channel{
           id: 5,
