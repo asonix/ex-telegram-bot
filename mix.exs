@@ -15,7 +15,7 @@ defmodule Telegram.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger]]
+    [extra_applications: [:logger], applications: [:httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -28,6 +28,8 @@ defmodule Telegram.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [{:httpoison, "~> 0.10.0"},
+     {:httpoison_form_data, "~> 0.1.1"},
+     {:poison, "~> 3.0"}]
   end
 end
